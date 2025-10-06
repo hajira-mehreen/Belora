@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belora</title>
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'poppins', sans-serif;
+        }
+
+        .navbar {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            padding: 0px 60px;
+            position: fixed;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .logo {
+            width: 90px;
+            height: 82px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(6, auto);
+            justify-content: end;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #C8A165;
+        }
+
+        .btn {
+            background-color: #c8a97e;
+            color: #fff;
+            font-size: 16px;
+            padding: 11px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            font-family: 'poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #C8a97e;
+            border-color: #c8a97e;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        /* Hamburger icon */
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            grid-column: 3;
+            justify-self: end;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        .hero {
+            display: grid;
+            height: 100vh;
+            text-align: center;
+            place-items: center;
+            grid-template-areas: "stack";
+        }
+
+        .bg-img {
+            grid-area: stack;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(bg.jpg) no-repeat center center/cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        .hero-txt {
+            grid-area: stack;
+            display: grid;
+            gap: 20px;
+            transform: translateY(22px);
+        }
+
+        .hero-txt h1 {
+            color: #ffc97f;
+            font-size: 70px;
+            font-family: 'cormorant garamond', sans-serif;
+        }
+
+        .sub-txt h1 {
+            display: grid;
+            gap: 16px;
+            font-size: 70px;
+            font-weight: 500;
+            letter-spacing: 5px;
+            color: #fff;
+            font-family: 'poppins', sans-serif;
+        }
+
+        .fourim {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 33px;
+        }
+
+        .four-img img {
+            width: 155px;
+            height: 155px;
+            object-fit: cover;
+            border-radius: 80px;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 0 0 0 transparent;
+        }
+
+        .four-img img:hover {
+            border-color: #555;
+            box-shadow: 0 0 15px rgba(12, 12, 11, 0.7);
+            transform: scale(1.05);
+        }
+
+        .content {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .content h1 {
+            font-size: 40px;
+            color: #333;
+
+        }
+
+        .items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(222px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .item {
+            display: grid;
+            gap: 16px;
+        }
+
+        .item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .item img:hover {
+            transform: scale(1.03);
+        }
+
+        .item-txt {
+            text-align: center;
+            color: #333;
+            display: grid;
+            gap: 6px;
+        }
+
+        .item h3::before,
+        .item h3::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 1px;
+            background-color: #C8A165;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .item h3::after {
+            bottom: -10px;
+        }
+
+        .item h3::before {
+            bottom: -6px;
+        }
+
+        .item h3:hover::before,
+        .item h3:hover::after {
+            width: 100%;
+        }
+
+        .item h3:hover {
+            color: #C8A165;
+        }
+
+        .story-one-grid {
+            display: grid;
+            grid-template-columns: 49% 51%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .story-txt {
+            display: grid;
+            grid-template-rows: repeat(4, auto);
+            align-content: center;
+            justify-items: flex-start;
+            gap: 1rem;
+            padding-left: 30px;
+        }
+
+        .story-one-text {
+            gap: 1rem;
+            width: 82%;
+        }
+
+        .story-txt h2 {
+            color: #C8A165;
+            font-style: 'cormorant garamond', sans-serif;
+            font-size: 44px;
+        }
+
+        .story-txt h1 {
+            font-size: 40px;
+            font-weight: 600;
+        }
+
+        .story-txt h1 span {
+            color: #c8a97e;
+            font-size: 42px;
+            font-family: 'cormorant garamond', sans-serif;
+        }
+
+        .story-txt p {
+            font-size: 15px;
+            color: #555;
+            width: 93%;
+            line-height: 1.6;
+        }
+
+        .read-one-more {
+            text-decoration: none;
+            color: #2b2727;
+            border: 1px solid #2b2727;
+            padding: 10px 25px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .read-one-more:hover {
+            background: #0e0d0d;
+            color: #fff;
+        }
+
+        .image-frame {
+            height: 600px;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dish-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+            color: white;
+        }
+
+        .dish-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .dish-text {
+            display: grid;
+            grid-template-rows: repeat(3, auto);
+            align-content: center;
+            justify-items: flex-start;
+            gap: 1rem;
+        }
+
+        .dish-text h2 {
+            font-size: 27px;
+            color: #272525;
+        }
+
+        .dish-text h1 {
+            color: #C8A165;
+            font-size: 40px;
+            line-height: 2;
+            font-family: 'cormorant garamond', sans-serif;
+
+        }
+
+        .dish-text p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #272525;
+            width: 88%;
+        }
+
+        .catering-section {
+            display: grid;
+            grid-template-rows: auto auto;
+            justify-items: center;
+            row-gap: 2rem;
+            background: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .catering-section h2 {
+            font-size: 50px;
+            color: #070707;
+            font-family: 'cormorant garamond', sans-serif;
+        }
+
+        .catering-section span {
+            color: #C8A165;
+            font-size: 50px;
+            font-family: 'cormorant garamond', sans-serif;
+        }
+
+        .catering-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 9rem;
+        }
+
+        .catering-card {
+            display: grid;
+            grid-template-rows: auto auto auto;
+            row-gap: 1rem;
+        }
+
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            justify-self: center;
+        }
+
+        .catering-card h3 {
+            font-size: 25px;
+            color: #222;
+            font-weight: 700;
+        }
+
+        .catering-card p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #555;
+            max-width: 250px;
+            justify-self: center;
+        }
+
+        .menu-section {
+            padding: 40px;
+        }
+
+        .menu-section h1 {
+            text-align: center;
+            padding-bottom: 40px;
+            font-size: 42px;
+            color: #222020;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px 80px;
+        }
+
+        .menu-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            align-items: center;
+            column-gap: 20px;
+            transition: transform 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-bottom: 1px solid #555;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item img {
+            width: 86px;
+            height: 86px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .menu-content h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .menu-content p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .tag {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .tag.new {
+            background: #ffd700;
+            color: #000;
+            margin: 6px;
+        }
+
+        .tag.seasonal {
+            background: #f76c6c;
+            color: #fff;
+            margin: 6px;
+        }
+
+        .line {
+            width: 55px;
+            border-top: 2px solid #202020;
+        }
+
+        .price-line span {
+            color: #f5b339;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .view-btn {
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .view {
+            padding: 15px 45px;
+            color: #fff;
+            background-color: #242121;
+            border: 1px solid transparent;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .view:hover {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #000;
+            transform: translatey(-5px);
+        }
+
+        .popular {
+            padding: 25px;
+        }
+
+        .popular h2 {
+            text-align: center;
+            font-size: 45px;
+            color: #555;
+            padding-bottom: 35px;
+        }
+
+        .menu-img {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 40px 200px 253px 10px;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .dish {
+            border: 1px solid transparent;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .dish img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .dish h3 {
+            padding: 0.5rem;
+            color: #000;
+            font-size: 25px;
+        }
+
+        .dish h2 {
+            font-size: 20px;
+            padding: 0;
+        }
+
+        .dish:hover {
+            transform: scale(1.05);
+        }
+
+        .up1 {
+            grid-column: 1;
+            grid-row: 1 / span 3;
+        }
+
+        .down1 {
+            grid-column: 2;
+            grid-row: 2 / span 4;
+        }
+
+        .up2 {
+            grid-column: 3;
+            grid-row: 1 / span 3;
+        }
+
+        .down2 {
+            grid-column: 4;
+            grid-row: 2 / span 4;
+        }
+
+        .masterchefs-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 45px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .chef-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .chef-card {
+            background: #fff;
+            border-radius: 10px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .chef-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .chef-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .chef-card h3 {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .chef-card p {
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .social-icons {
+            display: grid;
+            grid-template-columns: repeat(4, 22px);
+            place-content: center;
+            padding-bottom: 15px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .social-icons i {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .social-icons i:hover {
+            color: #000;
+        }
+
+        .blog-section {
+            padding: 2rem;
+            background: #fafafa;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #333;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 1.2rem;
+        }
+
+        .blog-content h3 {
+            font-size: 1.3rem;
+            color: #222;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-content p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+
+        .testimonials {
+            padding: 3rem 2rem;
+            margin: auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #d4a762;
+            letter-spacing: 2px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 1rem;
+            box-shadow: 13px 15px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stars i {
+            color: goldenrod;
+            margin-right: 2px;
+        }
+
+        .quote {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .author {
+            display: grid;
+            grid-template-columns: 50px auto;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author h4 {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #d4a762;
+        }
+
+        .author span {
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .contact-page {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 20px;
+        }
+
+        .map {
+            grid-column: 1 / 3;
+        }
+
+        .contact-info {
+            grid-column: 1 / 3;
+            text-align: center;
+            background: #f8f8f8;
+            padding: 20px;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-rows: 50px 1fr;
+            gap: 10px;
+            padding: 50px;
+            width: 100%;
+        }
+
+        .contact-form form {
+            display: grid;
+            gap: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .contact-form button {
+            padding: 10px;
+            background-color: #c59d5f;
+            color: white;
+            border: 1px solid transparent;
+            width: 25%;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            color: #c59d5f;
+            background-color: white;
+            border: 1px solid #c59d5f;
+        }
+
+        .contact-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .belora-footer {
+            background-color: #373434;
+            color: white;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            padding: 90px 55px;
+        }
+
+        .footer-column h3 {
+            color: #e8c786;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #ffcc66;
+        }
+
+        .footer-icons {
+            margin-top: 0.8rem;
+        }
+
+        .footer-icons a {
+            color: white;
+            margin-right: 0.4rem;
+            transition: color 0.3s;
+        }
+
+        .footer-icons a:hover {
+            color: #555;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 35px;
+            font-size: 15px;
+        }
+
+        @media (max-width:1024px) {
+            .hero {
+                height: 82vh;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .story-one-grid {
+                gap: 22px;
+                grid-template-columns: 1fr;
+                padding-bottom: 25px;
+            }
+
+            .catering-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-img {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .up1,
+            .down1,
+            .up2,
+            .down2 {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .dish-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dish-text {
+                padding-left: 25px;
+            }
+
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-page {
+                grid-template-columns: 1fr;
+            }
+
+            .map,
+            .contact-info {
+                grid-column: 1;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+
+            .menu-icon {
+                display: block;
+                background-color: #555;
+            }
+
+            .navbar {
+                grid-template-columns: auto auto;
+                grid-template-rows: auto auto;
+            }
+
+            /* Mobile nav hidden initially */
+            .nav-links {
+                display: grid;
+                grid-template-columns: 1fr;
+                width: 100%;
+                overflow: hidden;
+                max-height: 0;
+                transition: max-height 0.4s ease-in-out;
+                gap: 15px;
+                padding: 0 10px;
+            }
+
+            .btn {
+                width: 67%;
+                font-size: 13px;
+                padding: 7px;
+            }
+
+            #menu-toggle:checked~.nav-links {
+                max-height: 400px;
+                padding: 10px;
+            }
+
+            .sub-txt h1{
+                font-size: 40px;
+            }
+
+            .menu-img {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 15px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"><img src="logo.png" alt="logo"></div>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+                <button class="btn">Book a table</button>
+            </div>
+        </nav>
+    </header>
+    <section class="hero" id="home">
+        <div class="bg-img"></div>
+        <div class="hero-txt">
+            <h1>Belora</h1>
+            <div class="sub-txt">
+                <h1>Authentic Redifined</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="fourim">
+        <div class="four-img">
+            <img src="fim-1.jpg" alt="img">
+            <h3>Pasta</h3>
+        </div>
+        <div class="four-img">
+            <img src="fim-4.jpg" alt="img">
+            <h3>Chicken Biryani</h3>
+        </div>
+        <div class="four-img">
+            <img src="fim-2.jpg" alt="img">
+            <h3>Spaghetti</h3>
+        </div>
+        <div class="four-img">
+            <img src="fim-3.jpg" alt="img">
+            <h3>Naan Chicken</h3>
+        </div>
+        <div class="four-img">
+            <img src="fim-5.jpg" alt="img">
+            <h3>Manchurian</h3>
+        </div>
+    </section>
+
+    <section class="content">
+        <h1>We Offer Top Notch</h1>
+        <div class="items">
+            <div class="item item1">
+                <img src="offer-1.jpg" alt="offers-img">
+                <div class="item-txt">
+                    <h2>Breakfast</h2>
+                    <h3>View Menu</h3>
+                </div>
+            </div>
+            <div class="item item2">
+                <img src="offer-2.jpg" alt="offers-img">
+                <div class="item-txt">
+                    <h2>Appetizers</h2>
+                    <h3>View Menu</h3>
+                </div>
+            </div>
+            <div class="item item3">
+                <img src="offer-3.jpg" alt="offers-img">
+                <div class="item-txt">
+                    <h2>Drinks</h2>
+                    <h3>View Menu</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="our-story-one" id="about">
+        <div class="story-one-grid">
+            <div class="story-txt">
+                <h2>Our Story</h2>
+                <h1>Every Flavor<span> Tells a Story </span></h1>
+                <p>
+                    At Belora, food is more than just a meal—it's a memory, a celebration of culture. Our dishes are
+                    crafted with tradition in every layer.We believe every spice has a purpose.From locally-sourced
+                    produce to timeless techniques,we bring generations of flavor to your table.
+                    Inspired by heritage, driven by heart.Welcome to a place where every plate speaks passion. We
+                    believe in slow cooking, hand-picked spices, and preserving
+                    authenticity. Each dish we serve is crafted with care, love, and
+                    a passion for storytelling through food. Welcome to a place where
+                    every meal tells a story—your story.
+                </p>
+                <a href="#" class="read-one-more">Read More</a>
+            </div>
+            <div class="story-one-image">
+                <div class="image-frame">
+                    <img src="rest.jpg" alt="Restaurant Ambience" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="signature-dish">
+        <div class="dish-grid">
+            <div class="dish-image">
+                <img src="signature-dish.png" alt="signature-dish" />
+            </div>
+            <div class="dish-text">
+                <h2>Signature Dish</h2>
+                <h1>Golden Chicken Manchurian</h1>
+                <p>
+                    A bold fusion of Chinese technique and Indian spice, our Golden Chicken Manchurian
+                    is crispy, juicy, and deeply flavorful. Marinated chicken bites are wok-tossed in
+                    a rich soy-garlic sauce, spiked with green chilies and bell peppers for that signature
+                    sizzle and zing. Finished with a hint of honey and toasted sesame, it's served with fragrant fried
+                    rice or hakka noodles. A modern classic that bridges tradition and indulgence — only at
+                    Belora.Golden Chicken Manchurian is a majestic fusion of Indo-Chinese heritage, crafted for those
+                    who appreciate bold flavors with a refined presentation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="catering-section">
+        <h2>Catering <span> Services</span></h2>
+        <div class="catering-grid">
+            <div class="catering-card">
+                <img src="birthday-cake.png" alt="Birthday Party" class="icon" />
+                <h3>Birthday Party</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
+                </p>
+            </div>
+            <div class="catering-card">
+                <img src="talk.png" alt="Business Meetings" class="icon" />
+                <h3>Business Meetings</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
+                </p>
+            </div>
+            <div class="catering-card">
+                <img src="tray.png" alt="Wedding Party" class="icon" />
+                <h3>Wedding Party</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
+                </p>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Menu section -->
+    <section class="menu-section" id="menu">
+        <h1>Delicious Menu</h1>
+        <div class="menu-grid">
+            <!-- Item 1 -->
+            <div class="menu-item">
+                <img src="fim-4.jpg" alt="Biryani">
+                <div class="menu-content">
+                    <h3>Biryani <span class="tag new">NEW</span></h3>
+                    <p>Fragrant basmati rice with spices, saffron, and marinated meat or veggies.</p>
+                </div>
+                <div class="price-line">
+                    <div class="line"></div>
+                    <span>$18.00</span>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="menu-item">
+                <img src="fim-5.jpg" alt="Manchurian">
+                <div class="menu-content">
+                    <h3>Manchurian</h3>
+                    <p>Deep-fried veggie or chicken balls in a spicy soy garlic sauce.</p>
+                </div>
+                <div class="price-line">
+                    <div class="line"></div>
+                    <span>$15.50</span>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="menu-item">
+                <img src="fim-1.jpg" alt="Pasta">
+                <div class="menu-content">
+                    <h3>Pasta <span class="tag seasonal">SEASONAL</span></h3>
+                    <p>Classic Italian pasta tossed in creamy white or tangy red sauce.</p>
+                </div>
+                <div class="price-line">
+                    <div class="line"></div>
+                    <span>$22.00</span>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="menu-item">
+                <img src="fim-2.jpg" alt="Spaghetti">
+                <div class="menu-content">
+                    <h3>Spaghetti</h3>
+                    <p>Spaghetti noodles served with marinara sauce and parmesan cheese.</p>
+                </div>
+                <div class="price-line">
+                    <div class="line"></div>
+                    <span>$20.00</span>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="menu-item">
+                <img src="momos.jpg" alt="Momos">
+                <div class="menu-content">
+                    <h3>Momos</h3>
+                    <p>Steamed or fried dumplings stuffed with seasoned meat or veggies.</p>
+                </div>
+                <div class="price-line">
+                    <div class="line"></div>
+                    <span>$12.00</span>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="menu-item">
+                <img src="fish-curry.jpg" alt="Fish Curry">
+                <div class="menu-content">
+                    <h3>Fish Curry</h3>
+                    <p>Delicately spiced fish fillets in a coconut and tomato curry base.</p>
+                </div>
+                <div class="price-line">
+                    <div class="line"></div>
+                    <span>$28.00</span>
+                </div>
+            </div>
+        </div>
+        <div class="view-btn">
+            <p>During winter daily from 7:00 pm to 9:00 pm</p>
+            <button class="view">View All Menu</button>
+        </div>
+    </section>
+
+    <!-- Popular dishes -->
+    <section class="popular">
+        <h2>Our Popular Dishes</h2>
+        <div class="menu-img">
+            <div class="dish up1">
+                <img src="hak.jpg" alt="Noodles">
+                <div class="dish-txt">
+                    <h3>Hakka Noodles</h3>
+                    <p>Veg-Hakka Noodles with fresh veggies and spices</p>
+                    <h2>$15.00</h2>
+                </div>
+            </div>
+
+            <div class="dish down1">
+                <img src="fim-5.jpg" alt="Manchurian">
+                <div class="dish-txt">
+                    <h3>Golden Manchurian</h3>
+                    <p>Deep-fried veggie or chicken balls in a spicy soy garlic sauce.</p>
+                    <h2>$29.99</h2>
+                </div>
+            </div>
+
+            <div class="dish up2">
+                <img src="fim-4.jpg" alt="Butter Chicken">
+                <div class="dish-txt">
+                    <h3>Chicken Biryani</h3>
+                    <p>Fragrant basmati rice with spices, saffron, and marinated meat or veggies.</p>
+                    <h2>$15.00</h2>
+                </div>
+            </div>
+
+            <div class="dish down2">
+                <img src="fim-1.jpg" alt="Pasta">
+                <div class="dish-txt">
+                    <h3>Creamy Pasta</h3>
+                    <p>Classic Italian pasta tossed in creamy white or tangy red sauce.</p>
+                    <h2>$25.00</h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="view-btn">
+            <button class="view">View All Menu</button>
+        </div>
+    </section>
+
+    <!-- Chefs -->
+    <section class="masterchefs-section">
+        <h2 class="section-title">Our Masterchefs</h2>
+        <div class="chef-grid">
+            <div class="chef-card">
+                <img src="chef-1.jpg" alt="chef">
+                <h3>Jihan Sikander</h3>
+                <p>Restaurant Owner</p>
+                <div class="social-icons">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-google-plus-g"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+            <div class="chef-card">
+                <img src="chef-3.jpg" alt="chef">
+                <h3>Haya Suleyman</h3>
+                <p>Head Chef</p>
+                <div class="social-icons">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-google-plus-g"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+            <div class="chef-card">
+                <img src="chef-2.jpg" alt="chef">
+                <h3>Kharl Branyt</h3>
+                <p>Chef</p>
+                <div class="social-icons">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-google-plus-g"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+            <div class="chef-card">
+                <img src="chef-4.jpg" alt="chef">
+                <h3>Murat Aahil</h3>
+                <p>Chef</p>
+                <div class="social-icons">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-google-plus-g"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="blog-section" id="blog">
+        <h2 class="section-title">Restaurant Blog</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="fim-1.jpg" alt="Gourmet Pasta">
+                <div class="blog-content">
+                    <h3>Secrets of Perfect Pasta</h3>
+                    <p>Discover the art of making authentic Italian pasta right from scratch, with tips from our top
+                        chefs.</p>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="steak.jpg" alt="Luxury Steak">
+                <div class="blog-content">
+                    <h3>The Luxury Steak Experience</h3>
+                    <p>We reveal the cooking techniques that make our steaks tender, flavorful, and unforgettable.</p>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <img src="cake.jpg" alt="Dessert">
+                <div class="blog-content">
+                    <h3>Sweet Treats from Our Kitchen</h3>
+                    <p>From molten lava cakes to artisanal cheesecakes, indulge in our chef's dessert masterpieces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <p class="subtitle">TESTIMONIALS</p>
+            <h2>What People Are Saying</h2>
+        </div>
+
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </p>
+                <p class="quote">
+                    The taste of food was really amazing, Wow! Outstanding dinner made by Master Chef Jihan, I never
+                    forget this delicious food experience.
+                </p>
+                <div class="author">
+                    <img src="test-1.jpg" alt="person1">
+                    <div>
+                        <h4>Mahir Bey</h4>
+                        <span>Italy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </p>
+                <p class="quote">
+                    Hygienic food & fresh environment, everyone had a wonderful delight experience. It was FABULOUS!
+                    Great experience at The Italian Gourmet.
+                </p>
+                <div class="author">
+                    <img src="tets-2.jpg" alt="person2">
+                    <div>
+                        <h4>Hayat Aahil</h4>
+                        <span>Turkey</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </p>
+                <p class="quote">
+                    Special treat to dine, It was wow experience food was really delicious! Outstanding dinner made by
+                    Master Chef, food experience was unforgettable!
+                </p>
+                <div class="author">
+                    <img src="test-3.jpg" alt="person3">
+                    <div>
+                        <h4>Osman Shah</h4>
+                        <span>New York</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-page" id="contact">
+        <!-- map -->
+        <div class="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086947748774!2d-122.41941538468145!3d37.77492977975961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808b0d4c39e5%3A0x7c5f9a8c8f6f6f!2sRestaurant!5e0!3m2!1sen!2sus!4v1690849576543"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <!-- contact info -->
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p> 123 Main Street, New York, NY</p>
+            <p> +1 234 567 890</p>
+            <p> contact@restaurant.com</p>
+        </div>
+
+        <!-- contact form -->
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="contact-image">
+            <img src="rest.jpg" alt="Restaurant">
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="belora-footer">
+        <div class="footer-container">
+
+            <!-- About -->
+            <div class="footer-column">
+                <h3>About Belora</h3>
+                <p>Welcome to Belora Food Restaurant, where we serve authentic flavors made with passion. Our chefs
+                    bring tradition and creativity to every dish.</p>
+                <h4>Connect</h4>
+                <div class="footer-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Dine-In</a></li>
+                    <li><a href="#">Takeaway</a></li>
+                    <li><a href="#">Home Delivery</a></li>
+                    <li><a href="#">Catering</a></li>
+                    <li><a href="#">Private Events</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <p>123 Flavor Street, Belora City, India</p>
+                <p>+91 98765 43210</p>
+                <p>+91 91234 56789</p>
+                <p>info@belorafoods.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Belora Food Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
