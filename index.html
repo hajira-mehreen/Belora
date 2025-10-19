@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belora</title>
-    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -113,7 +113,7 @@
 
         .bg-img {
             grid-area: stack;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(bg.jpg) no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/bg.jpg') no-repeat center center/cover;
             height: 100%;
             width: 100%;
         }
@@ -158,6 +158,10 @@
             transition: all 0.4s ease-in-out;
             box-shadow: 0 0 0 0 transparent;
         }
+
+        .four-img { cursor: pointer; }
+
+        .four-img:hover img { transform: scale(1.04); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
 
         .four-img img:hover {
             border-color: #555;
@@ -1003,7 +1007,7 @@
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo"><img src="logo.png" alt="logo"></div>
+            <div class="logo"><img src="images/logo.png" alt="logo"></div>
             <input type="checkbox" id="menu-toggle">
             <label for="menu-toggle" class="menu-icon">
                 <span></span>
@@ -1016,7 +1020,7 @@
                 <a href="#menu">Menu</a>
                 <a href="#blog">Blog</a>
                 <a href="#contact">Contact</a>
-                <button class="btn">Book a table</button>
+                <button class="btn" id="book-btn">Book a table</button>
             </div>
         </nav>
     </header>
@@ -1032,23 +1036,23 @@
 
     <section class="fourim">
         <div class="four-img">
-            <img src="fim-1.jpg" alt="img">
+            <img src="images/fim-1.jpg" alt="img">
             <h3>Pasta</h3>
         </div>
         <div class="four-img">
-            <img src="fim-4.jpg" alt="img">
+            <img src="images/fim-4.jpg" alt="img">
             <h3>Chicken Biryani</h3>
         </div>
         <div class="four-img">
-            <img src="fim-2.jpg" alt="img">
+            <img src="images/fim-2.jpg" alt="img">
             <h3>Spaghetti</h3>
         </div>
         <div class="four-img">
-            <img src="fim-3.jpg" alt="img">
+            <img src="images/fim-3.jpg" alt="img">
             <h3>Naan Chicken</h3>
         </div>
         <div class="four-img">
-            <img src="fim-5.jpg" alt="img">
+            <img src="images/fim-5.jpg" alt="img">
             <h3>Manchurian</h3>
         </div>
     </section>
@@ -1057,21 +1061,21 @@
         <h1>We Offer Top Notch</h1>
         <div class="items">
             <div class="item item1">
-                <img src="offer-1.jpg" alt="offers-img">
+                <img src="images/offer-1.jpg" alt="offers-img">
                 <div class="item-txt">
                     <h2>Breakfast</h2>
                     <h3>View Menu</h3>
                 </div>
             </div>
             <div class="item item2">
-                <img src="offer-2.jpg" alt="offers-img">
+                <img src="images/offer-2.jpg" alt="offers-img">
                 <div class="item-txt">
                     <h2>Appetizers</h2>
                     <h3>View Menu</h3>
                 </div>
             </div>
             <div class="item item3">
-                <img src="offer-3.jpg" alt="offers-img">
+                <img src="images/offer-3.jpg" alt="offers-img">
                 <div class="item-txt">
                     <h2>Drinks</h2>
                     <h3>View Menu</h3>
@@ -1096,11 +1100,11 @@
                     a passion for storytelling through food. Welcome to a place where
                     every meal tells a story—your story.
                 </p>
-                <a href="#" class="read-one-more">Read More</a>
+                    <a href="#" class="read-one-more" id="read-more">Read More</a>
             </div>
             <div class="story-one-image">
                 <div class="image-frame">
-                    <img src="rest.jpg" alt="Restaurant Ambience" />
+                    <img src="images/rest.jpg" alt="Restaurant Ambience" />
                 </div>
             </div>
         </div>
@@ -1109,7 +1113,7 @@
     <section class="signature-dish">
         <div class="dish-grid">
             <div class="dish-image">
-                <img src="signature-dish.png" alt="signature-dish" />
+                <img src="images/signature-dish.png" alt="signature-dish" />
             </div>
             <div class="dish-text">
                 <h2>Signature Dish</h2>
@@ -1131,19 +1135,19 @@
         <h2>Catering <span> Services</span></h2>
         <div class="catering-grid">
             <div class="catering-card">
-                <img src="birthday-cake.png" alt="Birthday Party" class="icon" />
+                <img src="images/birthday-cake.png" alt="Birthday Party" class="icon" />
                 <h3>Birthday Party</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
                 </p>
             </div>
             <div class="catering-card">
-                <img src="talk.png" alt="Business Meetings" class="icon" />
+                <img src="images/talk.png" alt="Business Meetings" class="icon" />
                 <h3>Business Meetings</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
                 </p>
             </div>
             <div class="catering-card">
-                <img src="tray.png" alt="Wedding Party" class="icon" />
+                <img src="images/tray.png" alt="Wedding Party" class="icon" />
                 <h3>Wedding Party</h3>
                 <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
                 </p>
@@ -1157,7 +1161,7 @@
         <div class="menu-grid">
             <!-- Item 1 -->
             <div class="menu-item">
-                <img src="fim-4.jpg" alt="Biryani">
+                <img src="images/fim-4.jpg" alt="Biryani">
                 <div class="menu-content">
                     <h3>Biryani <span class="tag new">NEW</span></h3>
                     <p>Fragrant basmati rice with spices, saffron, and marinated meat or veggies.</p>
@@ -1170,7 +1174,7 @@
 
             <!-- Item 2 -->
             <div class="menu-item">
-                <img src="fim-5.jpg" alt="Manchurian">
+                <img src="images/fim-5.jpg" alt="Manchurian">
                 <div class="menu-content">
                     <h3>Manchurian</h3>
                     <p>Deep-fried veggie or chicken balls in a spicy soy garlic sauce.</p>
@@ -1183,7 +1187,7 @@
 
             <!-- Item 3 -->
             <div class="menu-item">
-                <img src="fim-1.jpg" alt="Pasta">
+                <img src="images/fim-1.jpg" alt="Pasta">
                 <div class="menu-content">
                     <h3>Pasta <span class="tag seasonal">SEASONAL</span></h3>
                     <p>Classic Italian pasta tossed in creamy white or tangy red sauce.</p>
@@ -1196,7 +1200,7 @@
 
             <!-- Item 4 -->
             <div class="menu-item">
-                <img src="fim-2.jpg" alt="Spaghetti">
+                <img src="images/fim-2.jpg" alt="Spaghetti">
                 <div class="menu-content">
                     <h3>Spaghetti</h3>
                     <p>Spaghetti noodles served with marinara sauce and parmesan cheese.</p>
@@ -1209,7 +1213,7 @@
 
             <!-- Item 5 -->
             <div class="menu-item">
-                <img src="momos.jpg" alt="Momos">
+                <img src="images/momos.jpg" alt="Momos">
                 <div class="menu-content">
                     <h3>Momos</h3>
                     <p>Steamed or fried dumplings stuffed with seasoned meat or veggies.</p>
@@ -1222,7 +1226,7 @@
 
             <!-- Item 6 -->
             <div class="menu-item">
-                <img src="fish-curry.jpg" alt="Fish Curry">
+                <img src="images/fish-curry.jpg" alt="Fish Curry">
                 <div class="menu-content">
                     <h3>Fish Curry</h3>
                     <p>Delicately spiced fish fillets in a coconut and tomato curry base.</p>
@@ -1244,7 +1248,7 @@
         <h2>Our Popular Dishes</h2>
         <div class="menu-img">
             <div class="dish up1">
-                <img src="hak.jpg" alt="Noodles">
+                <img src="images/hak.jpg" alt="Noodles">
                 <div class="dish-txt">
                     <h3>Hakka Noodles</h3>
                     <p>Veg-Hakka Noodles with fresh veggies and spices</p>
@@ -1253,7 +1257,7 @@
             </div>
 
             <div class="dish down1">
-                <img src="fim-5.jpg" alt="Manchurian">
+                <img src="images/fim-5.jpg" alt="Manchurian">
                 <div class="dish-txt">
                     <h3>Golden Manchurian</h3>
                     <p>Deep-fried veggie or chicken balls in a spicy soy garlic sauce.</p>
@@ -1262,7 +1266,7 @@
             </div>
 
             <div class="dish up2">
-                <img src="fim-4.jpg" alt="Butter Chicken">
+                <img src="images/fim-4.jpg" alt="Butter Chicken">
                 <div class="dish-txt">
                     <h3>Chicken Biryani</h3>
                     <p>Fragrant basmati rice with spices, saffron, and marinated meat or veggies.</p>
@@ -1271,7 +1275,7 @@
             </div>
 
             <div class="dish down2">
-                <img src="fim-1.jpg" alt="Pasta">
+                <img src="images/fim-1.jpg" alt="Pasta">
                 <div class="dish-txt">
                     <h3>Creamy Pasta</h3>
                     <p>Classic Italian pasta tossed in creamy white or tangy red sauce.</p>
@@ -1290,7 +1294,7 @@
         <h2 class="section-title">Our Masterchefs</h2>
         <div class="chef-grid">
             <div class="chef-card">
-                <img src="chef-1.jpg" alt="chef">
+                <img src="images/chef-1.jpg" alt="chef">
                 <h3>Jihan Sikander</h3>
                 <p>Restaurant Owner</p>
                 <div class="social-icons">
@@ -1301,7 +1305,7 @@
                 </div>
             </div>
             <div class="chef-card">
-                <img src="chef-3.jpg" alt="chef">
+                <img src="images/chef-3.jpg" alt="chef">
                 <h3>Haya Suleyman</h3>
                 <p>Head Chef</p>
                 <div class="social-icons">
@@ -1312,7 +1316,7 @@
                 </div>
             </div>
             <div class="chef-card">
-                <img src="chef-2.jpg" alt="chef">
+                <img src="images/chef-2.jpg" alt="chef">
                 <h3>Kharl Branyt</h3>
                 <p>Chef</p>
                 <div class="social-icons">
@@ -1323,7 +1327,7 @@
                 </div>
             </div>
             <div class="chef-card">
-                <img src="chef-4.jpg" alt="chef">
+                <img src="images/chef-4.jpg" alt="chef">
                 <h3>Murat Aahil</h3>
                 <p>Chef</p>
                 <div class="social-icons">
@@ -1341,7 +1345,7 @@
         <h2 class="section-title">Restaurant Blog</h2>
         <div class="blog-grid">
             <div class="blog-card">
-                <img src="fim-1.jpg" alt="Gourmet Pasta">
+                <img src="images/fim-1.jpg" alt="Gourmet Pasta">
                 <div class="blog-content">
                     <h3>Secrets of Perfect Pasta</h3>
                     <p>Discover the art of making authentic Italian pasta right from scratch, with tips from our top
@@ -1350,7 +1354,7 @@
             </div>
 
             <div class="blog-card">
-                <img src="steak.jpg" alt="Luxury Steak">
+                <img src="images/steak.jpg" alt="Luxury Steak">
                 <div class="blog-content">
                     <h3>The Luxury Steak Experience</h3>
                     <p>We reveal the cooking techniques that make our steaks tender, flavorful, and unforgettable.</p>
@@ -1358,7 +1362,7 @@
             </div>
 
             <div class="blog-card">
-                <img src="cake.jpg" alt="Dessert">
+                <img src="images/cake.jpg" alt="Dessert">
                 <div class="blog-content">
                     <h3>Sweet Treats from Our Kitchen</h3>
                     <p>From molten lava cakes to artisanal cheesecakes, indulge in our chef's dessert masterpieces.</p>
@@ -1388,7 +1392,7 @@
                     forget this delicious food experience.
                 </p>
                 <div class="author">
-                    <img src="test-1.jpg" alt="person1">
+                    <img src="images/test-1.jpg" alt="person1">
                     <div>
                         <h4>Mahir Bey</h4>
                         <span>Italy</span>
@@ -1409,7 +1413,7 @@
                     Great experience at The Italian Gourmet.
                 </p>
                 <div class="author">
-                    <img src="tets-2.jpg" alt="person2">
+                    <img src="images/tets-2.jpg" alt="person2">
                     <div>
                         <h4>Hayat Aahil</h4>
                         <span>Turkey</span>
@@ -1430,7 +1434,7 @@
                     Master Chef, food experience was unforgettable!
                 </p>
                 <div class="author">
-                    <img src="test-3.jpg" alt="person3">
+                    <img src="images/test-3.jpg" alt="person3">
                     <div>
                         <h4>Osman Shah</h4>
                         <span>New York</span>
@@ -1468,7 +1472,7 @@
         </div>
 
         <div class="contact-image">
-            <img src="rest.jpg" alt="Restaurant">
+            <img src="images/rest.jpg" alt="Restaurant">
         </div>
     </section>
 
@@ -1528,6 +1532,297 @@
             <p>© 2025 Belora Food Restaurant. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="modal-backdrop" aria-hidden="true">
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+            <div id="modal-content">
+                <!-- dynamic content inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-panel {
+            background: #fff;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: auto;
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 12px;
+            top: 8px;
+            background: transparent;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        /* Booking form */
+        .booking-form {
+            display: grid;
+            gap: 12px;
+        }
+
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+        }
+
+        .booking-form .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .menu-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .menu-list .menu-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+
+        .blog-full {
+            line-height: 1.6;
+            color: #222;
+        }
+
+        .blog-grid .blog-card { cursor: pointer; }
+    </style>
+
+    <script>
+        (function(){
+            const modal = document.getElementById('modal-backdrop');
+            const modalContent = document.getElementById('modal-content');
+            const modalClose = document.getElementById('modal-close');
+
+            function openModal(html){
+                modalContent.innerHTML = html;
+                modal.classList.add('show');
+                modal.setAttribute('aria-hidden','false');
+                // move focus to modal for accessibility
+                setTimeout(()=>{
+                    const focusable = modalContent.querySelector('button, a, input, textarea, select');
+                    if(focusable) focusable.focus();
+                },50);
+            }
+
+            function closeModal(){
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden','true');
+                modalContent.innerHTML = '';
+            }
+
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(e){
+                if(e.target === modal) closeModal();
+            });
+
+            // Booking button
+            const bookBtn = document.getElementById('book-btn');
+            if(bookBtn) bookBtn.addEventListener('click', function(){
+                const html = `
+                    <h2 id="modal-title">Book a Table</h2>
+                    <form id="booking-form" class="booking-form">
+                        <div class="row">
+                            <input type="text" id="b-name" placeholder="Your name" required />
+                            <input type="tel" id="b-phone" placeholder="Phone" required />
+                        </div>
+                        <div class="row">
+                            <input type="date" id="b-date" required />
+                            <input type="time" id="b-time" required />
+                        </div>
+                        <div class="row">
+                            <select id="b-people">
+                                <option>1 person</option>
+                                <option>2 people</option>
+                                <option>3 people</option>
+                                <option>4 people</option>
+                                <option>5+ people</option>
+                            </select>
+                            <select id="b-area">
+                                <option>Main Dining</option>
+                                <option>Private Room</option>
+                                <option>Outdoor</option>
+                            </select>
+                        </div>
+                        <textarea id="b-notes" placeholder="Notes (optional)" rows="3"></textarea>
+                        <div style="display:flex;gap:10px;align-items:center;margin-top:8px;">
+                            <button type="submit" class="btn">Confirm Booking</button>
+                            <button type="button" id="cancel-book" class="btn" style="background:#eee;color:#222;border:1px solid #ccc;">Cancel</button>
+                        </div>
+                    </form>
+                `;
+                openModal(html);
+
+                // attach form handler
+                document.getElementById('cancel-book').addEventListener('click', closeModal);
+                document.getElementById('booking-form').addEventListener('submit', function(ev){
+                    ev.preventDefault();
+                    const name = document.getElementById('b-name').value;
+                    const phone = document.getElementById('b-phone').value;
+                    const date = document.getElementById('b-date').value;
+                    const time = document.getElementById('b-time').value;
+                    const people = document.getElementById('b-people').value;
+                    // simple confirmation -- in real app you'd POST to server
+                    openModal(`<h2>Booking Confirmed</h2><p>Thanks <strong>${name}</strong>! Your table for <strong>${people}</strong> on <strong>${date}</strong> at <strong>${time}</strong> has been received. We'll contact you at <strong>${phone}</strong> if needed.</p><div style="margin-top:12px;"><button class=\"btn\" id=\"ok-close\">OK</button></div>`);
+                    document.getElementById('ok-close').addEventListener('click', closeModal);
+                });
+            });
+
+            // View Menu handlers - make each .item h3 clickable (category menus)
+            document.querySelectorAll('.item h3').forEach(function(el){
+                el.style.cursor = 'pointer';
+                el.addEventListener('click', function(){
+                    const menuHtml = `
+                        <h2>Menu - ${el.textContent}</h2>
+                        <div class="menu-list">
+                            <div class="menu-entry"><div>Pasta Carbonara</div><div>$14.00</div></div>
+                            <div class="menu-entry"><div>Tomato Basil Soup</div><div>$7.50</div></div>
+                            <div class="menu-entry"><div>Caesar Salad</div><div>$9.00</div></div>
+                        </div>
+                        <div style="margin-top:12px;"><button class=\"btn\" id=\"menu-close\">Close</button></div>
+                    `;
+                    openModal(menuHtml);
+                    document.getElementById('menu-close').addEventListener('click', closeModal);
+                });
+            });
+
+            // View All Menu buttons (Delicious Menu and Popular Dishes)
+            document.querySelectorAll('.view').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                    // build menu items from .menu-item
+                    const menuItems = Array.from(document.querySelectorAll('.menu-item')).map(mi => {
+                        const nameEl = mi.querySelector('.menu-content h3');
+                        const name = nameEl ? nameEl.childNodes[0].textContent.trim() : '';
+                        const desc = mi.querySelector('.menu-content p') ? mi.querySelector('.menu-content p').textContent.trim() : '';
+                        const price = mi.querySelector('.price-line span') ? mi.querySelector('.price-line span').textContent.trim() : '';
+                        return {name, desc, price};
+                    });
+
+                    const popular = Array.from(document.querySelectorAll('.dish')).map(d => {
+                        const name = d.querySelector('.dish-txt h3') ? d.querySelector('.dish-txt h3').textContent.trim() : '';
+                        const desc = d.querySelector('.dish-txt p') ? d.querySelector('.dish-txt p').textContent.trim() : '';
+                        const price = d.querySelector('.dish-txt h2') ? d.querySelector('.dish-txt h2').textContent.trim() : '';
+                        const img = d.querySelector('img') ? d.querySelector('img').src : '';
+                        return {name, desc, price, img};
+                    });
+
+                    let html = `<h2>Full Menu</h2><div class="menu-list">`;
+                    menuItems.forEach(mi => {
+                        html += `<div class=\"menu-entry\"><div><strong>${mi.name}</strong><div style=\"font-size:0.9rem;color:#666;\">${mi.desc}</div></div><div style=\"text-align:right\">${mi.price}</div></div>`;
+                    });
+                    html += `</div>`;
+
+                    if(popular.length){
+                        html += `<h3 style="margin-top:16px;">Popular Dishes</h3><div class="menu-list">`;
+                        popular.forEach(p => {
+                            html += `<div class=\"menu-entry\"><div style=\"display:flex;gap:10px;align-items:center;\"><img src=\"${p.img}\" style=\"width:80px;height:60px;object-fit:cover;border-radius:6px;\"/><div><strong>${p.name}</strong><div style=\"font-size:0.9rem;color:#666;\">${p.desc}</div></div></div><div>${p.price}</div></div>`;
+                        });
+                        html += `</div>`;
+                    }
+
+                    html += `<div style="margin-top:12px;"><button class=\"btn\" id=\"menu-all-close\">Close</button></div>`;
+                    openModal(html);
+                    document.getElementById('menu-all-close').addEventListener('click', closeModal);
+                });
+            });
+
+            // Read More
+            const readMore = document.getElementById('read-more');
+            if(readMore) readMore.addEventListener('click', function(ev){
+                ev.preventDefault();
+                const longText = `
+                    <h2>Our Story — Extended</h2>
+                    <div class="blog-full">
+                        <p>At Belora, food is more than just a meal—it's a memory, a celebration of culture. Our dishes are crafted with generations-old traditions, hand-selected spices, and locally sourced produce. We invite you into a kitchen where every flavor is layered with intention: slow-cooked broths, hand-mixed masalas, and techniques passed down through families. Our mission is simple – to create a space where guests feel at home, where every plate tells a story and every bite is an invitation.</p>
+                        <p>We believe in sustainability and community; we partner with local farmers and artisans to ensure the freshest ingredients reach your table. From intimate dinners to large celebrations, Belora is crafted to be part of your life’s moments.</p>
+                    </div>
+                    <div style="margin-top:12px;"><button class=\"btn\" id=\"read-close\">Close</button></div>
+                `;
+                openModal(longText);
+                document.getElementById('read-close').addEventListener('click', closeModal);
+            });
+
+            // Hero images (.fourim) open menu modal when clicked
+            document.querySelectorAll('.fourim .four-img').forEach(function(card){
+                card.addEventListener('click', function(){
+                    const titleEl = card.querySelector('h3');
+                    const title = titleEl ? titleEl.textContent.trim() : 'Menu';
+                    const menuHtml = `
+                        <h2>${title} Menu</h2>
+                        <div class="menu-list">
+                            <div class="menu-entry"><div><strong>${title} Special 1</strong><div style="font-size:0.9rem;color:#666;">A delicious ${title.toLowerCase()} option</div></div><div>$12.00</div></div>
+                            <div class="menu-entry"><div><strong>${title} Special 2</strong><div style="font-size:0.9rem;color:#666;">Chef's take on ${title.toLowerCase()}</div></div><div>$15.00</div></div>
+                            <div class="menu-entry"><div><strong>${title} Side</strong><div style="font-size:0.9rem;color:#666;">Perfect pairing</div></div><div>$6.50</div></div>
+                        </div>
+                        <div style="margin-top:12px;"><button class=\"btn\" id=\"menu-close-hero\">Close</button></div>
+                    `;
+                    openModal(menuHtml);
+                    document.getElementById('menu-close-hero').addEventListener('click', closeModal);
+                });
+            });
+
+            // Blog cards - open full post (short image + more text)
+            document.querySelectorAll('.blog-card').forEach(function(card, idx){
+                card.addEventListener('click', function(){
+                    const title = card.querySelector('h3').textContent;
+                    const img = card.querySelector('img').src;
+                    const preview = card.querySelector('p').textContent;
+                    const extended = preview + ' ' + 'Here is a longer article excerpt with more details about preparation methods, ingredients, and chef notes. Enjoy tips, step-by-step suggestions, and serving ideas to get the best out of the recipe.';
+                    const html = `
+                        <h2>${title}</h2>
+                        <img src="${img}" alt="${title}" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:12px;"/>
+                        <div class="blog-full"><p>${extended}</p></div>
+                        <div style="margin-top:12px;"><button class=\"btn\" id=\"blog-close\">Close</button></div>
+                    `;
+                    openModal(html);
+                    document.getElementById('blog-close').addEventListener('click', closeModal);
+                });
+            });
+
+            // Accessibility: close on Escape
+            document.addEventListener('keydown', function(e){
+                if(e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+            });
+        })();
+    </script>
 
 </body>
 
