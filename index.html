@@ -14,26 +14,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <style>
+        /* -- Base reset and dark theme base -- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --accent: #bd8436;
+            /* primary accent */
+            --accent-contrast: #0b0b0b;
+            /* text on accent */
+            --accent-weak: rgba(189, 132, 54, 0.12);
+            --muted: #bfc0bf;
+            --bg: #0b0b0b;
+            --panel: #101010;
+            --card: #0f0f0f;
+            --text: #ececec;
+            --subtext: #bdbdbd;
+        }
+
         body {
             font-family: 'poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .navbar {
             display: grid;
             grid-template-columns: auto 1fr;
             align-items: center;
-            padding: 0px 60px;
+            padding: 12px 40px;
             position: fixed;
             width: 100%;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 10;
+            background-color: rgba(16, 16, 16, 0.96);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+            z-index: 50;
+            backdrop-filter: blur(6px);
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         .logo {
@@ -48,38 +69,49 @@
 
         .nav-links {
             display: grid;
-            grid-template-columns: repeat(6, auto);
+            grid-template-columns: repeat(8, auto);
             justify-content: end;
             align-items: center;
-            gap: 2rem;
+            gap: 1.2rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #555;
+            color: var(--muted);
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: color 0.25s ease, transform 0.25s ease;
         }
 
         .nav-links a:hover {
-            color: #C8A165;
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* user greeting shown when signed in */
+        #user-greeting {
+            display: none;
+            margin-left: 8px;
+            color: var(--muted);
+            font-weight: 600;
         }
 
         .btn {
-            background-color: #c8a97e;
-            color: #fff;
-            font-size: 16px;
-            padding: 11px;
+            background-color: var(--accent);
+            color: #0b0b0b;
+            font-size: 15px;
+            padding: 9px 12px;
             border: 1px solid transparent;
             border-radius: 6px;
             font-family: 'poppins', sans-serif;
-            transition: all 0.3s ease;
+            transition: all 0.22s ease;
+            cursor: pointer;
         }
 
         .btn:hover {
-            background-color: #fff;
-            color: #C8a97e;
-            border-color: #c8a97e;
+            background-color: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-3px);
         }
 
         #menu-toggle {
@@ -98,7 +130,7 @@
             display: block;
             width: 25px;
             height: 3px;
-            background: white;
+            background: var(--muted);
             margin: 5px 0;
             transition: 0.3s;
         }
@@ -109,13 +141,18 @@
             text-align: center;
             place-items: center;
             grid-template-areas: "stack";
+            overflow: hidden;
         }
 
         .bg-img {
             grid-area: stack;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/bg.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('images/bg.jpg') no-repeat center center/cover;
             height: 100%;
             width: 100%;
+            filter: saturate(0.9) contrast(1.05);
+            transform: scale(1.02);
+            transition: transform 10s linear;
+            animation: bgSlow 18s linear infinite alternate;
         }
 
         .hero-txt {
@@ -126,9 +163,11 @@
         }
 
         .hero-txt h1 {
-            color: #ffc97f;
+            color: var(--accent);
             font-size: 70px;
             font-family: 'cormorant garamond', sans-serif;
+            text-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+            animation: float 6s ease-in-out infinite;
         }
 
         .sub-txt h1 {
@@ -137,8 +176,9 @@
             font-size: 70px;
             font-weight: 500;
             letter-spacing: 5px;
-            color: #fff;
+            color: var(--text);
             font-family: 'poppins', sans-serif;
+            opacity: 0.98;
         }
 
         .fourim {
@@ -157,14 +197,20 @@
             border-radius: 80px;
             transition: all 0.4s ease-in-out;
             box-shadow: 0 0 0 0 transparent;
+            transform-origin: center center;
         }
 
-        .four-img { cursor: pointer; }
+        .four-img {
+            cursor: pointer;
+        }
 
-        .four-img:hover img { transform: scale(1.04); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+        .four-img:hover img {
+            transform: scale(1.04);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
 
         .four-img img:hover {
-            border-color: #555;
+            border-color: #d9d3d3;
             box-shadow: 0 0 15px rgba(12, 12, 11, 0.7);
             transform: scale(1.05);
         }
@@ -176,7 +222,7 @@
 
         .content h1 {
             font-size: 40px;
-            color: #333;
+            color: #e5e0e0;
 
         }
 
@@ -205,9 +251,8 @@
 
         .item-txt {
             text-align: center;
-            color: #333;
+            color: #e5e0e0;
             display: grid;
-            gap: 6px;
         }
 
         .item h3::before,
@@ -216,7 +261,7 @@
             position: absolute;
             width: 0%;
             height: 1px;
-            background-color: #C8A165;
+            background-color: var(--accent);
             left: 0;
             transition: width 0.3s ease;
         }
@@ -235,7 +280,7 @@
         }
 
         .item h3:hover {
-            color: #C8A165;
+            color: var(--accent);
         }
 
         .story-one-grid {
@@ -260,7 +305,7 @@
         }
 
         .story-txt h2 {
-            color: #C8A165;
+            color: var(--accent);
             font-style: 'cormorant garamond', sans-serif;
             font-size: 44px;
         }
@@ -271,29 +316,29 @@
         }
 
         .story-txt h1 span {
-            color: #c8a97e;
+            color: var(--accent);
             font-size: 42px;
             font-family: 'cormorant garamond', sans-serif;
         }
 
         .story-txt p {
             font-size: 15px;
-            color: #555;
+            color: #d9d3d3;
             width: 93%;
             line-height: 1.6;
         }
 
         .read-one-more {
             text-decoration: none;
-            color: #2b2727;
-            border: 1px solid #2b2727;
+            color: #fdfbfb;
+            border: 1px solid #fcf8f8;
             padding: 10px 25px;
             transition: 0.3s ease-in-out;
         }
 
         .read-one-more:hover {
-            background: #0e0d0d;
-            color: #fff;
+            background: #fff;
+            color: #0e0d0d;
         }
 
         .image-frame {
@@ -330,11 +375,11 @@
 
         .dish-text h2 {
             font-size: 27px;
-            color: #272525;
+            color: #ffeeee;
         }
 
         .dish-text h1 {
-            color: #C8A165;
+            color: var(--accent);
             font-size: 40px;
             line-height: 2;
             font-family: 'cormorant garamond', sans-serif;
@@ -344,7 +389,7 @@
         .dish-text p {
             font-size: 1rem;
             line-height: 1.6;
-            color: #272525;
+            color: #ffeeee;
             width: 88%;
         }
 
@@ -353,19 +398,19 @@
             grid-template-rows: auto auto;
             justify-items: center;
             row-gap: 2rem;
-            background: white;
+            background: transparent;
             text-align: center;
             padding: 30px 0;
         }
 
         .catering-section h2 {
             font-size: 50px;
-            color: #070707;
+            color: var(--text);
             font-family: 'cormorant garamond', sans-serif;
         }
 
         .catering-section span {
-            color: #C8A165;
+            color: var(--accent);
             font-size: 50px;
             font-family: 'cormorant garamond', sans-serif;
         }
@@ -391,14 +436,14 @@
 
         .catering-card h3 {
             font-size: 25px;
-            color: #222;
+            color: #fff;
             font-weight: 700;
         }
 
         .catering-card p {
             font-size: 1rem;
             line-height: 1.5;
-            color: #555;
+            color: #d9d3d3;
             max-width: 250px;
             justify-self: center;
         }
@@ -411,7 +456,7 @@
             text-align: center;
             padding-bottom: 40px;
             font-size: 42px;
-            color: #222020;
+            color: #e5e0e0;
         }
 
         .menu-grid {
@@ -428,7 +473,7 @@
             transition: transform 0.3s ease;
             background: rgba(255, 255, 255, 0.02);
             padding: 15px;
-            border-bottom: 1px solid #555;
+            border-bottom: 1px solid #d9d3d3;
         }
 
         .menu-item:hover {
@@ -451,7 +496,7 @@
         .menu-content p {
             margin: 5px 0 0;
             font-size: 14px;
-            color: #555;
+            color: #d9d3d3;
         }
 
         .tag {
@@ -480,7 +525,7 @@
         }
 
         .price-line span {
-            color: #f5b339;
+            color: var(--accent);
             font-size: 16px;
             font-weight: bold;
         }
@@ -491,22 +536,22 @@
         }
 
         .view {
-            padding: 15px 45px;
-            color: #fff;
-            background-color: #242121;
-            border: 1px solid transparent;
-            font-size: 18px;
+            padding: 12px 36px;
+            color: var(--text);
+            background-color: transparent;
+            border: 1px solid rgba(255 253 253 / 31%);
+            font-size: 16px;
             font-weight: 500;
-            letter-spacing: 2px;
+            letter-spacing: 1.4px;
             margin-top: 10px;
-            transition: transform 0.3s ease;
+            transition: transform 0.22s ease, background 0.22s ease;
         }
 
         .view:hover {
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #000;
-            transform: translatey(-5px);
+            background-color: rgba(255, 255, 255, 0.04);
+            color: var(--accent);
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.08);
         }
 
         .popular {
@@ -516,7 +561,7 @@
         .popular h2 {
             text-align: center;
             font-size: 45px;
-            color: #555;
+            color: #d9d3d3;
             padding-bottom: 35px;
         }
 
@@ -545,7 +590,7 @@
 
         .dish h3 {
             padding: 0.5rem;
-            color: #000;
+            color: #d9d9d9;
             font-size: 25px;
         }
 
@@ -555,7 +600,8 @@
         }
 
         .dish:hover {
-            transform: scale(1.05);
+            transform: scale(1.03) translateY(-6px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
         }
 
         .up1 {
@@ -598,7 +644,7 @@
         }
 
         .chef-card {
-            background: #fff;
+            background: #d3d3d3;
             border-radius: 10px;
             text-align: center;
             overflow: hidden;
@@ -621,11 +667,13 @@
             font-size: 1.2rem;
             margin-top: 15px;
             font-weight: 600;
+            color: #000000;
         }
 
         .chef-card p {
-            color: #888;
-            margin-bottom: 10px;
+            font-size:0.9rem;
+            color:#333333;
+            margin:6px;
         }
 
         .social-icons {
@@ -633,8 +681,9 @@
             grid-template-columns: repeat(4, 22px);
             place-content: center;
             padding-bottom: 15px;
+            gap: 9px;
             font-size: 1rem;
-            color: #555;
+            color: #000000;
         }
 
         .social-icons i {
@@ -648,12 +697,12 @@
 
         .blog-section {
             padding: 2rem;
-            background: #fafafa;
+            background: transparent;
         }
 
         .section-title {
             text-align: center;
-            color: #333;
+            color: var(--text);
         }
 
         .blog-grid {
@@ -663,11 +712,11 @@
         }
 
         .blog-card {
-            background: white;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .blog-card:hover {
@@ -686,13 +735,13 @@
 
         .blog-content h3 {
             font-size: 1.3rem;
-            color: #222;
+            color: #dfdfdf;
             margin-bottom: 0.5rem;
         }
 
         .blog-content p {
             font-size: 0.95rem;
-            color: #555;
+            color: #d9d3d3;
             line-height: 1.4;
         }
 
@@ -709,7 +758,7 @@
 
         .subtitle {
             font-size: 18px;
-            color: #d4a762;
+            color: var(--accent);
             letter-spacing: 2px;
         }
 
@@ -746,7 +795,7 @@
         .quote {
             font-size: 0.95rem;
             line-height: 1.5;
-            color: #555;
+            color: #d9d3d3;
         }
 
         .author {
@@ -767,12 +816,12 @@
             margin: 0;
             font-size: 0.9rem;
             font-weight: 600;
-            color: #d4a762;
+            color: var(--accent);
         }
 
         .author span {
             font-size: 0.8rem;
-            color: #555;
+            color: #d9d3d3;
         }
 
         .contact-page {
@@ -789,7 +838,8 @@
         .contact-info {
             grid-column: 1 / 3;
             text-align: center;
-            background: #f8f8f8;
+            background: #d3d3d3;
+            color: #000000;
             padding: 20px;
         }
 
@@ -810,22 +860,33 @@
         .contact-form textarea {
             padding: 10px;
             border: 1px solid #ccc;
+            border-radius: 6px;
             width: 100%;
         }
 
-        .contact-form button {
-            padding: 10px;
-            background-color: #c59d5f;
+        .btn-sub{
+            padding: 10px 15px;
+            background-color: var(--accent);
             color: white;
             border: 1px solid transparent;
-            width: 25%;
+            border-radius: 6px;
+            width: auto;
             cursor: pointer;
+            text-decoration: none;
+            font-family: 'poppins', sans-serif;
+            font-size: 15px;
+            transition: all 0.22s ease;
         }
 
-        .contact-form button:hover {
-            color: #c59d5f;
-            background-color: white;
-            border: 1px solid #c59d5f;
+        .btn-sub a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-sub:hover {
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
         }
 
         .contact-image img {
@@ -847,7 +908,7 @@
         }
 
         .footer-column h3 {
-            color: #e8c786;
+            color: var(--accent);
             margin-bottom: 0.8rem;
         }
 
@@ -886,7 +947,7 @@
         }
 
         .footer-icons a:hover {
-            color: #555;
+            color: #d9d3d3;
         }
 
         .footer-bottom {
@@ -957,7 +1018,7 @@
 
             .menu-icon {
                 display: block;
-                background-color: #555;
+                background-color: #d9d3d3;
             }
 
             .navbar {
@@ -988,7 +1049,7 @@
                 padding: 10px;
             }
 
-            .sub-txt h1{
+            .sub-txt h1 {
                 font-size: 40px;
             }
 
@@ -1036,24 +1097,29 @@
 
     <section class="fourim">
         <div class="four-img">
-            <img src="images/fim-1.jpg" alt="img">
+            <img src="images/fim-1.jpg" alt="Creamy Pasta with fresh herbs and parmesan">
             <h3>Pasta</h3>
+            <p style="font-size:0.85rem;color:#999;margin-top:8px;">Fresh Italian pasta tossed in creamy white sauce</p>
         </div>
         <div class="four-img">
-            <img src="images/fim-4.jpg" alt="img">
+            <img src="images/fim-4.jpg" alt="Golden Chicken Biryani served with raita">
             <h3>Chicken Biryani</h3>
+            <p style="font-size:0.85rem;color:#999;margin-top:8px;">Fragrant basmati rice with spiced marinated chicken</p>
         </div>
         <div class="four-img">
-            <img src="images/fim-2.jpg" alt="img">
+            <img src="images/fim-2.jpg" alt="Classic Spaghetti with marinara and parmesan">
             <h3>Spaghetti</h3>
+            <p style="font-size:0.85rem;color:#999;margin-top:8px;">Spaghetti noodles in rich marinara sauce</p>
         </div>
         <div class="four-img">
-            <img src="images/fim-3.jpg" alt="img">
+            <img src="images/fim-3.jpg" alt="Naan Chicken - tender flatbread with succulent chicken">
             <h3>Naan Chicken</h3>
+            <p style="font-size:0.85rem;color:#999;margin-top:8px;">Soft naan bread paired with tender tandoori chicken</p>
         </div>
         <div class="four-img">
-            <img src="images/fim-5.jpg" alt="img">
+            <img src="images/fim-5.jpg" alt="Golden Manchurian balls in spicy soy garlic sauce">
             <h3>Manchurian</h3>
+            <p style="font-size:0.85rem;color:#999;margin-top:8px;">Deep-fried golden balls in spicy soy garlic sauce</p>
         </div>
     </section>
 
@@ -1061,23 +1127,26 @@
         <h1>We Offer Top Notch</h1>
         <div class="items">
             <div class="item item1">
-                <img src="images/offer-1.jpg" alt="offers-img">
+                <img src="images/offer-1.jpg" alt="Delicious breakfast spread with fresh pastries and coffee">
                 <div class="item-txt">
                     <h2>Breakfast</h2>
+                    <p style="font-size:0.9rem;color:#999;margin:8px 0;">Fresh morning delights</p>
                     <h3>View Menu</h3>
                 </div>
             </div>
             <div class="item item2">
-                <img src="images/offer-2.jpg" alt="offers-img">
+                <img src="images/offer-2.jpg" alt="Appetizers platter with various starters and dips">
                 <div class="item-txt">
                     <h2>Appetizers</h2>
+                    <p style="font-size:0.9rem;color:#999;margin:8px 0;">Tasty bites to start your meal</p>
                     <h3>View Menu</h3>
                 </div>
             </div>
             <div class="item item3">
-                <img src="images/offer-3.jpg" alt="offers-img">
+                <img src="images/offer-3.jpg" alt="Refreshing beverage selection and mocktails">
                 <div class="item-txt">
                     <h2>Drinks</h2>
+                    <p style="font-size:0.9rem;color:#999;margin:8px 0;">Refreshing beverages and cocktails</p>
                     <h3>View Menu</h3>
                 </div>
             </div>
@@ -1100,11 +1169,11 @@
                     a passion for storytelling through food. Welcome to a place where
                     every meal tells a story—your story.
                 </p>
-                    <a href="#" class="read-one-more" id="read-more">Read More</a>
+                <a href="#" class="read-one-more" id="read-more">Read More</a>
             </div>
             <div class="story-one-image">
                 <div class="image-frame">
-                    <img src="images/rest.jpg" alt="Restaurant Ambience" />
+                    <img src="images/rest.jpg" alt="Belora Restaurant ambience - elegant dining room with warm lighting and traditional decor" />
                 </div>
             </div>
         </div>
@@ -1113,7 +1182,7 @@
     <section class="signature-dish">
         <div class="dish-grid">
             <div class="dish-image">
-                <img src="images/signature-dish.png" alt="signature-dish" />
+                <img src="images/signature-dish.png" alt="Golden Chicken Manchurian - crispy fried chicken in soy garlic sauce with bell peppers" />
             </div>
             <div class="dish-text">
                 <h2>Signature Dish</h2>
@@ -1135,33 +1204,30 @@
         <h2>Catering <span> Services</span></h2>
         <div class="catering-grid">
             <div class="catering-card">
-                <img src="images/birthday-cake.png" alt="Birthday Party" class="icon" />
+                <img src="images/cake.png" alt="Birthday Party catering with decorated cake and special menu" class="icon" />
                 <h3>Birthday Party</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
-                </p>
+                <p>Celebrate with customized catering for your special day with themed menu and decorations.</p>
             </div>
             <div class="catering-card">
-                <img src="images/talk.png" alt="Business Meetings" class="icon" />
+                <img src="images/meeting.png" alt="Business Meeting with corporate catering setup" class="icon" />
                 <h3>Business Meetings</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
-                </p>
+                <p>Professional catering services for corporate events and business meetings with gourmet options.</p>
             </div>
             <div class="catering-card">
-                <img src="images/tray.png" alt="Wedding Party" class="icon" />
+                <img src="images/food.png" alt="Wedding Party catering with elegant food presentation" class="icon" />
                 <h3>Wedding Party</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.
-                </p>
+                <p>Exquisite catering packages designed to make your wedding reception a memorable culinary experience.</p>
             </div>
         </div>
     </section>
- 
+
     <!-- Menu section -->
     <section class="menu-section" id="menu">
         <h1>Delicious Menu</h1>
         <div class="menu-grid">
             <!-- Item 1 -->
             <div class="menu-item">
-                <img src="images/fim-4.jpg" alt="Biryani">
+                <img src="images/fim-4.jpg" alt="Golden Chicken Biryani - fragrant basmati rice with marinated chicken">
                 <div class="menu-content">
                     <h3>Biryani <span class="tag new">NEW</span></h3>
                     <p>Fragrant basmati rice with spices, saffron, and marinated meat or veggies.</p>
@@ -1174,7 +1240,7 @@
 
             <!-- Item 2 -->
             <div class="menu-item">
-                <img src="images/fim-5.jpg" alt="Manchurian">
+                <img src="images/fim-5.jpg" alt="Golden Manchurian - crispy fried balls in spicy sauce">
                 <div class="menu-content">
                     <h3>Manchurian</h3>
                     <p>Deep-fried veggie or chicken balls in a spicy soy garlic sauce.</p>
@@ -1187,7 +1253,7 @@
 
             <!-- Item 3 -->
             <div class="menu-item">
-                <img src="images/fim-1.jpg" alt="Pasta">
+                <img src="images/fim-1.jpg" alt="Creamy Italian Pasta with fresh herbs and parmesan cheese">
                 <div class="menu-content">
                     <h3>Pasta <span class="tag seasonal">SEASONAL</span></h3>
                     <p>Classic Italian pasta tossed in creamy white or tangy red sauce.</p>
@@ -1200,7 +1266,7 @@
 
             <!-- Item 4 -->
             <div class="menu-item">
-                <img src="images/fim-2.jpg" alt="Spaghetti">
+                <img src="images/fim-2.jpg" alt="Classic Spaghetti with marinara sauce and melted parmesan">
                 <div class="menu-content">
                     <h3>Spaghetti</h3>
                     <p>Spaghetti noodles served with marinara sauce and parmesan cheese.</p>
@@ -1213,7 +1279,7 @@
 
             <!-- Item 5 -->
             <div class="menu-item">
-                <img src="images/momos.jpg" alt="Momos">
+                <img src="images/momos.jpg" alt="Steamed Momos dumplings with savory filling">
                 <div class="menu-content">
                     <h3>Momos</h3>
                     <p>Steamed or fried dumplings stuffed with seasoned meat or veggies.</p>
@@ -1226,7 +1292,7 @@
 
             <!-- Item 6 -->
             <div class="menu-item">
-                <img src="images/fish-curry.jpg" alt="Fish Curry">
+                <img src="images/fish-curry.jpg" alt="Aromatic Fish Curry in coconut and tomato base">
                 <div class="menu-content">
                     <h3>Fish Curry</h3>
                     <p>Delicately spiced fish fillets in a coconut and tomato curry base.</p>
@@ -1248,7 +1314,7 @@
         <h2>Our Popular Dishes</h2>
         <div class="menu-img">
             <div class="dish up1">
-                <img src="images/hak.jpg" alt="Noodles">
+                <img src="images/hak.jpg" alt="Veg-Hakka Noodles with fresh vegetables and soy sauce">
                 <div class="dish-txt">
                     <h3>Hakka Noodles</h3>
                     <p>Veg-Hakka Noodles with fresh veggies and spices</p>
@@ -1257,7 +1323,7 @@
             </div>
 
             <div class="dish down1">
-                <img src="images/fim-5.jpg" alt="Manchurian">
+                <img src="images/fim-5.jpg" alt="Golden Manchurian - crispy fried balls in spicy sauce">
                 <div class="dish-txt">
                     <h3>Golden Manchurian</h3>
                     <p>Deep-fried veggie or chicken balls in a spicy soy garlic sauce.</p>
@@ -1266,7 +1332,7 @@
             </div>
 
             <div class="dish up2">
-                <img src="images/fim-4.jpg" alt="Butter Chicken">
+                <img src="images/fim-4.jpg" alt="Fragrant Chicken Biryani with basmati rice and spices">
                 <div class="dish-txt">
                     <h3>Chicken Biryani</h3>
                     <p>Fragrant basmati rice with spices, saffron, and marinated meat or veggies.</p>
@@ -1275,7 +1341,7 @@
             </div>
 
             <div class="dish down2">
-                <img src="images/fim-1.jpg" alt="Pasta">
+                <img src="images/fim-1.jpg" alt="Creamy Pasta with rich white sauce and fresh parmesan">
                 <div class="dish-txt">
                     <h3>Creamy Pasta</h3>
                     <p>Classic Italian pasta tossed in creamy white or tangy red sauce.</p>
@@ -1294,9 +1360,10 @@
         <h2 class="section-title">Our Masterchefs</h2>
         <div class="chef-grid">
             <div class="chef-card">
-                <img src="images/chef-1.jpg" alt="chef">
+                <img src="images/chef-1.jpg" alt="Jihan Sikander - Belora Restaurant Owner">
                 <h3>Jihan Sikander</h3>
                 <p>Restaurant Owner</p>
+                <p>Visionary founder with 20+ years of culinary expertise blending traditional flavors with innovation</p>
                 <div class="social-icons">
                     <i class="fab fa-twitter"></i>
                     <i class="fab fa-facebook-f"></i>
@@ -1305,9 +1372,10 @@
                 </div>
             </div>
             <div class="chef-card">
-                <img src="images/chef-3.jpg" alt="chef">
+                <img src="images/chef-3.jpg" alt="Haya Suleyman - Head Chef at Belora">
                 <h3>Haya Suleyman</h3>
                 <p>Head Chef</p>
+                <p>Master of spice blending and traditional recipes, specializing in Indo-Chinese fusion cuisine</p>
                 <div class="social-icons">
                     <i class="fab fa-twitter"></i>
                     <i class="fab fa-facebook-f"></i>
@@ -1316,9 +1384,10 @@
                 </div>
             </div>
             <div class="chef-card">
-                <img src="images/chef-2.jpg" alt="chef">
+                <img src="images/chef-2.jpg" alt="Kharl Branyt - Chef at Belora">
                 <h3>Kharl Branyt</h3>
                 <p>Chef</p>
+                <p>Passionate about Italian and Mediterranean cuisine expert in pasta preparation and creation</p>
                 <div class="social-icons">
                     <i class="fab fa-twitter"></i>
                     <i class="fab fa-facebook-f"></i>
@@ -1327,9 +1396,10 @@
                 </div>
             </div>
             <div class="chef-card">
-                <img src="images/chef-4.jpg" alt="chef">
+                <img src="images/chef-4.jpg" alt="Murat Aahil - Expert Chef at Belora">
                 <h3>Murat Aahil</h3>
                 <p>Chef</p>
+                <p>Culinary artist with expertise in street food and traditional recipes creating bold and memorable flavors</p>
                 <div class="social-icons">
                     <i class="fab fa-twitter"></i>
                     <i class="fab fa-facebook-f"></i>
@@ -1345,16 +1415,15 @@
         <h2 class="section-title">Restaurant Blog</h2>
         <div class="blog-grid">
             <div class="blog-card">
-                <img src="images/fim-1.jpg" alt="Gourmet Pasta">
+                <img src="images/fim-1.jpg" alt="Fresh Italian pasta - Secrets of Perfect Pasta">
                 <div class="blog-content">
                     <h3>Secrets of Perfect Pasta</h3>
-                    <p>Discover the art of making authentic Italian pasta right from scratch, with tips from our top
-                        chefs.</p>
+                    <p>Discover the art of making authentic pasta right from scratch with tips from our top chefs.</p>
                 </div>
             </div>
 
             <div class="blog-card">
-                <img src="images/steak.jpg" alt="Luxury Steak">
+                <img src="images/steak.jpg" alt="Premium quality steak - The Luxury Steak Experience">
                 <div class="blog-content">
                     <h3>The Luxury Steak Experience</h3>
                     <p>We reveal the cooking techniques that make our steaks tender, flavorful, and unforgettable.</p>
@@ -1362,7 +1431,7 @@
             </div>
 
             <div class="blog-card">
-                <img src="images/cake.jpg" alt="Dessert">
+                <img src="images/cake.jpg" alt="Gourmet desserts - Sweet Treats from Our Kitchen">
                 <div class="blog-content">
                     <h3>Sweet Treats from Our Kitchen</h3>
                     <p>From molten lava cakes to artisanal cheesecakes, indulge in our chef's dessert masterpieces.</p>
@@ -1392,7 +1461,7 @@
                     forget this delicious food experience.
                 </p>
                 <div class="author">
-                    <img src="images/test-1.jpg" alt="person1">
+                    <img src="images/test-1.jpg" alt="chef">
                     <div>
                         <h4>Mahir Bey</h4>
                         <span>Italy</span>
@@ -1413,7 +1482,7 @@
                     Great experience at The Italian Gourmet.
                 </p>
                 <div class="author">
-                    <img src="images/tets-2.jpg" alt="person2">
+                    <img src="images/tets-2.jpg" alt="chef">
                     <div>
                         <h4>Hayat Aahil</h4>
                         <span>Turkey</span>
@@ -1434,7 +1503,7 @@
                     Master Chef, food experience was unforgettable!
                 </p>
                 <div class="author">
-                    <img src="images/test-3.jpg" alt="person3">
+                    <img src="images/test-3.jpg" alt="chef">
                     <div>
                         <h4>Osman Shah</h4>
                         <span>New York</span>
@@ -1463,16 +1532,18 @@
         <!-- contact form -->
         <div class="contact-form">
             <h2>Send Us a Message</h2>
-            <form>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit">Submit</button>
+            <form id="contact-form">
+                <input type="text" id="contact-name" placeholder="Your Name" required>
+                <input type="email" id="contact-email" placeholder="Your Email" required>
+                <textarea id="contact-message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="btn-sub">
+                    <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=hajimehr1308@gmail.com" target="_blank">Send Message</a>
+                </button>
             </form>
         </div>
 
         <div class="contact-image">
-            <img src="images/rest.jpg" alt="Restaurant">
+            <img src="images/rest.jpg" alt="Belora Restaurant interior - elegant dining ambience and decor">
         </div>
     </section>
 
@@ -1551,7 +1622,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 1000;
             padding: 20px;
         }
@@ -1561,15 +1632,17 @@
         }
 
         .modal-panel {
-            background: #fff;
+            background: linear-gradient(180deg, #0f0f0f, #121212);
+            color: var(--text);
             border-radius: 8px;
-            max-width: 800px;
+            max-width: 820px;
             width: 100%;
             max-height: 90vh;
             overflow: auto;
             padding: 24px;
             position: relative;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .modal-close {
@@ -1593,9 +1666,18 @@
         .booking-form select,
         .booking-form textarea {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 6px;
             width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text);
+        }
+
+        .form-error {
+            color: #ff7b7b;
+            font-size: 0.9rem;
+            margin-top: 4px;
+            display: block;
         }
 
         .booking-form .row {
@@ -1615,54 +1697,83 @@
             align-items: center;
             padding: 12px;
             border-radius: 6px;
-            background: #fafafa;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            color: var(--text);
         }
 
         .blog-full {
             line-height: 1.6;
-            color: #222;
+            color: var(--text);
         }
 
-        .blog-grid .blog-card { cursor: pointer; }
+        .blog-grid .blog-card {
+            cursor: pointer;
+        }
+
+        /* Click animation for images */
+        .img-click-animate {
+            animation: clickPop 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+            will-change: transform, box-shadow;
+        }
+
+        @keyframes clickPop {
+            0% {
+                transform: scale(1) rotate(0);
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            }
+
+            40% {
+                transform: scale(1.14) rotate(3deg);
+                box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            }
+        }
     </style>
 
     <script>
-        (function(){
             const modal = document.getElementById('modal-backdrop');
             const modalContent = document.getElementById('modal-content');
             const modalClose = document.getElementById('modal-close');
 
-            function openModal(html){
+            function openModal(html) {
                 modalContent.innerHTML = html;
                 modal.classList.add('show');
-                modal.setAttribute('aria-hidden','false');
+                modal.setAttribute('aria-hidden', 'false');
                 // move focus to modal for accessibility
-                setTimeout(()=>{
+                setTimeout(() => {
                     const focusable = modalContent.querySelector('button, a, input, textarea, select');
-                    if(focusable) focusable.focus();
-                },50);
+                    if (focusable) focusable.focus();
+                }, 50);
             }
 
-            function closeModal(){
+            function closeModal() {
                 modal.classList.remove('show');
-                modal.setAttribute('aria-hidden','true');
+                modal.setAttribute('aria-hidden', 'true');
                 modalContent.innerHTML = '';
             }
 
             modalClose.addEventListener('click', closeModal);
-            modal.addEventListener('click', function(e){
-                if(e.target === modal) closeModal();
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) closeModal();
             });
 
             // Booking button
             const bookBtn = document.getElementById('book-btn');
-            if(bookBtn) bookBtn.addEventListener('click', function(){
+            if (bookBtn) bookBtn.addEventListener('click', function () {
                 const html = `
                     <h2 id="modal-title">Book a Table</h2>
                     <form id="booking-form" class="booking-form">
                         <div class="row">
                             <input type="text" id="b-name" placeholder="Your name" required />
-                            <input type="tel" id="b-phone" placeholder="Phone" required />
+                            <input type="tel" id="b-phone" placeholder="Phone" 
+                                pattern="[0-9]*" inputmode="numeric"
+                                oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                required />
+                            <span id="phone-error" class="form-error"></span>
                         </div>
                         <div class="row">
                             <input type="date" id="b-date" required />
@@ -1693,47 +1804,75 @@
 
                 // attach form handler
                 document.getElementById('cancel-book').addEventListener('click', closeModal);
-                document.getElementById('booking-form').addEventListener('submit', function(ev){
+                document.getElementById('booking-form').addEventListener('submit', function (ev) {
                     ev.preventDefault();
-                    const name = document.getElementById('b-name').value;
-                    const phone = document.getElementById('b-phone').value;
+                    const name = document.getElementById('b-name').value.trim();
+                    let phone = document.getElementById('b-phone').value.replace(/[^0-9]/g, '');
                     const date = document.getElementById('b-date').value;
                     const time = document.getElementById('b-time').value;
                     const people = document.getElementById('b-people').value;
+                    const phoneErrEl = document.getElementById('phone-error');
+                    if (phoneErrEl) phoneErrEl.textContent = '';
+                    if (!/^[0-9]{10,}$/.test(phone)) {
+                        if (phoneErrEl) phoneErrEl.textContent = 'Please enter a valid phone number (numbers only, min 10 digits).';
+                        return;
+                    }
                     // simple confirmation -- in real app you'd POST to server
                     openModal(`<h2>Booking Confirmed</h2><p>Thanks <strong>${name}</strong>! Your table for <strong>${people}</strong> on <strong>${date}</strong> at <strong>${time}</strong> has been received. We'll contact you at <strong>${phone}</strong> if needed.</p><div style="margin-top:12px;"><button class=\"btn\" id=\"ok-close\">OK</button></div>`);
                     document.getElementById('ok-close').addEventListener('click', closeModal);
                 });
             });
 
-            // View Menu handlers - make each .item h3 clickable (category menus)
-            document.querySelectorAll('.item h3').forEach(function(el){
+            // View Menu handlers - make each .item h3 (View Menu) clickable (category menus)
+            document.querySelectorAll('.item h3').forEach(function (el) {
                 el.style.cursor = 'pointer';
-                el.addEventListener('click', function(){
-                    const menuHtml = `
-                        <h2>Menu - ${el.textContent}</h2>
-                        <div class="menu-list">
-                            <div class="menu-entry"><div>Pasta Carbonara</div><div>$14.00</div></div>
-                            <div class="menu-entry"><div>Tomato Basil Soup</div><div>$7.50</div></div>
-                            <div class="menu-entry"><div>Caesar Salad</div><div>$9.00</div></div>
-                        </div>
-                        <div style="margin-top:12px;"><button class=\"btn\" id=\"menu-close\">Close</button></div>
-                    `;
-                    openModal(menuHtml);
+                el.addEventListener('click', function () {
+                    let menuItems = [];
+                    // Get the category from the h2 sibling
+                    const categoryEl = el.closest('.item-txt').querySelector('h2');
+                    const category = categoryEl ? categoryEl.textContent.trim() : 'Menu';
+                    
+                    if (category === 'Breakfast') {
+                        menuItems = [
+                            { name: 'Fluffy Pancakes', desc: 'Golden pancakes with maple syrup and butter', price: '$12.00' },
+                            { name: 'Scrambled Eggs & Toast', desc: 'Farm fresh eggs with whole grain bread', price: '$8.50' },
+                            { name: 'Breakfast Burrito', desc: 'Eggs, cheese, bacon, and avocado wrap', price: '$11.00' }
+                        ];
+                    } else if (category === 'Appetizers') {
+                        menuItems = [
+                            { name: 'Crispy Spring Rolls', desc: 'Golden fried spring rolls with sweet chili sauce', price: '$7.99' },
+                            { name: 'Spinach Artichoke Dip', desc: 'Creamy blend served with warm bread', price: '$9.50' },
+                            { name: 'Chicken Tenders', desc: 'Breaded and fried with honey mustard', price: '$10.00' }
+                        ];
+                    } else if (category === 'Drinks') {
+                        menuItems = [
+                            { name: 'Fresh Mango Lassi', desc: 'Yogurt-based mango smoothie with cardamom', price: '$5.50' },
+                            { name: 'Iced Lemon Tea', desc: 'Refreshing chilled tea with fresh lemon', price: '$4.00' },
+                            { name: 'Virgin Mojito', desc: 'Fresh mint, lime, and sparkling water', price: '$6.00' }
+                        ];
+                    }
+                    
+                    let html = `<h2>Menu - ${category}</h2><div class="menu-list">`;
+                    menuItems.forEach(item => {
+                        html += `<div class="menu-entry"><div><strong>${item.name}</strong><div style="font-size:0.9rem;color:#999;">${item.desc}</div></div><div style="text-align:right">${item.price}</div></div>`;
+                    });
+                    html += `</div><div style="margin-top:12px;"><button class="btn" id="menu-close">Close</button></div>`;
+                    
+                    openModal(html);
                     document.getElementById('menu-close').addEventListener('click', closeModal);
                 });
             });
 
             // View All Menu buttons (Delicious Menu and Popular Dishes)
-            document.querySelectorAll('.view').forEach(function(btn){
-                btn.addEventListener('click', function(){
+            document.querySelectorAll('.view').forEach(function (btn) {
+                btn.addEventListener('click', function () {
                     // build menu items from .menu-item
                     const menuItems = Array.from(document.querySelectorAll('.menu-item')).map(mi => {
                         const nameEl = mi.querySelector('.menu-content h3');
                         const name = nameEl ? nameEl.childNodes[0].textContent.trim() : '';
                         const desc = mi.querySelector('.menu-content p') ? mi.querySelector('.menu-content p').textContent.trim() : '';
                         const price = mi.querySelector('.price-line span') ? mi.querySelector('.price-line span').textContent.trim() : '';
-                        return {name, desc, price};
+                        return { name, desc, price };
                     });
 
                     const popular = Array.from(document.querySelectorAll('.dish')).map(d => {
@@ -1741,7 +1880,7 @@
                         const desc = d.querySelector('.dish-txt p') ? d.querySelector('.dish-txt p').textContent.trim() : '';
                         const price = d.querySelector('.dish-txt h2') ? d.querySelector('.dish-txt h2').textContent.trim() : '';
                         const img = d.querySelector('img') ? d.querySelector('img').src : '';
-                        return {name, desc, price, img};
+                        return { name, desc, price, img };
                     });
 
                     let html = `<h2>Full Menu</h2><div class="menu-list">`;
@@ -1750,7 +1889,7 @@
                     });
                     html += `</div>`;
 
-                    if(popular.length){
+                    if (popular.length) {
                         html += `<h3 style="margin-top:16px;">Popular Dishes</h3><div class="menu-list">`;
                         popular.forEach(p => {
                             html += `<div class=\"menu-entry\"><div style=\"display:flex;gap:10px;align-items:center;\"><img src=\"${p.img}\" style=\"width:80px;height:60px;object-fit:cover;border-radius:6px;\"/><div><strong>${p.name}</strong><div style=\"font-size:0.9rem;color:#666;\">${p.desc}</div></div></div><div>${p.price}</div></div>`;
@@ -1766,7 +1905,7 @@
 
             // Read More
             const readMore = document.getElementById('read-more');
-            if(readMore) readMore.addEventListener('click', function(ev){
+            if (readMore) readMore.addEventListener('click', function (ev) {
                 ev.preventDefault();
                 const longText = `
                     <h2>Our Story — Extended</h2>
@@ -1781,8 +1920,8 @@
             });
 
             // Hero images (.fourim) open menu modal when clicked
-            document.querySelectorAll('.fourim .four-img').forEach(function(card){
-                card.addEventListener('click', function(){
+            document.querySelectorAll('.fourim .four-img').forEach(function (card) {
+                card.addEventListener('click', function () {
                     const titleEl = card.querySelector('h3');
                     const title = titleEl ? titleEl.textContent.trim() : 'Menu';
                     const menuHtml = `
@@ -1800,15 +1939,15 @@
             });
 
             // Blog cards - open full post (short image + more text)
-            document.querySelectorAll('.blog-card').forEach(function(card, idx){
-                card.addEventListener('click', function(){
+            document.querySelectorAll('.blog-card').forEach(function (card, idx) {
+                card.addEventListener('click', function () {
                     const title = card.querySelector('h3').textContent;
                     const img = card.querySelector('img').src;
                     const preview = card.querySelector('p').textContent;
                     const extended = preview + ' ' + 'Here is a longer article excerpt with more details about preparation methods, ingredients, and chef notes. Enjoy tips, step-by-step suggestions, and serving ideas to get the best out of the recipe.';
                     const html = `
                         <h2>${title}</h2>
-                        <img src="${img}" alt="${title}" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:12px;"/>
+                        <img src="${img}" alt="${title}" style="width:100%;height:285px;object-fit:cover;border-radius:6px;margin-bottom:12px;margin-top:12px;"/>
                         <div class="blog-full"><p>${extended}</p></div>
                         <div style="margin-top:12px;"><button class=\"btn\" id=\"blog-close\">Close</button></div>
                     `;
@@ -1818,10 +1957,9 @@
             });
 
             // Accessibility: close on Escape
-            document.addEventListener('keydown', function(e){
-                if(e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
             });
-        })();
     </script>
 
 </body>
